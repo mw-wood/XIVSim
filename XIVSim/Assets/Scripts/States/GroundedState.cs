@@ -16,6 +16,11 @@ public class GroundedState : BaseState
         else { return false; }
     }
 
+    public override void Logic()
+    {
+
+    }
+
     public override void ExitState()
     {
         Debug.Log("Exiting Grounded");

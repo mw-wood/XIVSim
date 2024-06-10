@@ -5,7 +5,7 @@ using UnityEngine;
 public class Statistics : MonoBehaviour
 {
     public float health { get; private set; }
-    public float maxMovementSpeed { get; private set; }
-    public float currentMovementSpeed { get; private set; }
-    public float acceleration { get; private set; }
+    public float maxMovementSpeed = 1f;
+    public float currentMovementSpeed = 1f;
+    public float acceleration = 1f;
 }

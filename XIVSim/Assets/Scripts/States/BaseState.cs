@@ -13,5 +13,7 @@ public abstract class BaseState
     }
     public abstract void EnterState();
     public abstract bool CheckStateSwitch(BaseState _nextState);
+
+    public abstract void Logic();
     public abstract void ExitState();
 }

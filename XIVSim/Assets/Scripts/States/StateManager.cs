@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class StateManager : MonoBehaviour
 {
+    //TODO Make more efficient
+
+    public CharacterController controller;
+    public Statistics stats;
+    public Transform _transform;
     public BaseState superContext {  get; private set; }
     public BaseState subContext { get; private set; }
+
+    private Vector3 currentMovementDirection;
 
     public IInputHandler movementHandler;
 
@@ -30,7 +37,7 @@ public class StateManager : MonoBehaviour
 
         if (this.movementHandler.horizontal != 0 || this.movementHandler.vertical != 0) 
         { 
-            _nextSuperState = new WalkState(this.superContext, this.subContext);
+            _nextSuperState = new WalkState(this.superContext, this.subContext, this.controller, this.stats, this.movementHandler, _transform);
         }
 
         else 
@@ -60,9 +67,18 @@ public class StateManager : MonoBehaviour
         }
     }
 
+    private void ExecuteStateLogic()
+    {
+        this.superContext.Logic();
+        this.subContext.Logic();
+    }
+
     private void Awake()
     {
-        movementHandler = this.GetComponent<IInputHandler>();
+        this.movementHandler = this.GetComponent<IInputHandler>();
+        this.controller = this.GetComponent<CharacterController>();
+        this._transform = this.GetComponent<Transform>();
+        this.stats = this.GetComponent<Statistics>();
     }
 
     void Start()
@@ -74,5 +90,6 @@ public class StateManager : MonoBehaviour
     void Update()
     {
         StateHandler();
+        ExecuteStateLogic();
     }
 }

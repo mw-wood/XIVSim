@@ -29,7 +29,7 @@ public class PlayerInputHandler : MonoBehaviour, IInputHandler
         List<string> keys = new List<string>(abilityInputMap.Keys);
         foreach (string key in keys)
         {
-            abilityInputMap[key] = Input.GetAxisRaw(key);
+            abilityInputMap[key] = Input.GetButtonDown(key) ? 1 : 0;
         }
     }
 
